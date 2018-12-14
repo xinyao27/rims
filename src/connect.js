@@ -1,7 +1,7 @@
 import Subscribe from './subscribe';
 import Provider from './provider';
 
-const connect = (mapStateToProps, { state, reducers, effects }) => (Components) => {
+const connect = (mapStateToProps, { state, reducers, effects }, Frame) => (Components) => {
   const dispatch = (action) => {
     const { type: dispatchType } = action;
 
@@ -24,6 +24,7 @@ const connect = (mapStateToProps, { state, reducers, effects }) => (Components) 
     dispatch,
     mapStateToProps,
     Components,
+    Frame,
   });
 };
 

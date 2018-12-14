@@ -9,3 +9,5 @@ src
 package-lock.json
 rollup.config.js
 yarn.lock
+.idea
+.vscode

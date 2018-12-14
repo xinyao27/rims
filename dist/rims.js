@@ -4,7 +4,7 @@
   (global.Rims = factory(global.React,global.produce));
 }(this, (function (React,produce) { 'use strict';
 
-  var React__default = 'default' in React ? React['default'] : React;
+  React = React && React.hasOwnProperty('default') ? React['default'] : React;
   produce = produce && produce.hasOwnProperty('default') ? produce['default'] : produce;
 
   function _classCallCheck(instance, Constructor) {
@@ -212,7 +212,10 @@
     var state = _ref.state,
         dispatch = _ref.dispatch,
         mapStateToProps = _ref.mapStateToProps,
-        Components = _ref.Components;
+        Components = _ref.Components,
+        Frame = _ref.Frame;
+    var FrameUsed = Frame || React;
+    var Component = Object.prototype.hasOwnProperty.call(FrameUsed, 'PureComponent') ? FrameUsed.PureComponent : FrameUsed.Component;
 
     var Provider =
     /*#__PURE__*/
@@ -282,17 +285,21 @@
             dispatch: dispatch
           }, mapStateToProps(storeState));
 
-          return React__default.createElement(Components, props);
+          if (Object.prototype.hasOwnProperty.call(FrameUsed, 'createElement')) {
+            return FrameUsed.createElement(Components, props);
+          }
+
+          throw new Error('Incoming framework error, should pass a framework similar to React!');
         }
       }]);
 
       return Provider;
-    }(React.Component);
+    }(Component);
 
     return Provider;
   }
 
-  var connect = function connect(mapStateToProps, _ref) {
+  var connect = function connect(mapStateToProps, _ref, Frame) {
     var state = _ref.state,
         reducers = _ref.reducers,
         effects = _ref.effects;
@@ -318,7 +325,8 @@
         state: state,
         dispatch: dispatch,
         mapStateToProps: mapStateToProps,
-        Components: Components
+        Components: Components,
+        Frame: Frame
       });
     };
   };

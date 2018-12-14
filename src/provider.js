@@ -1,11 +1,15 @@
-import React, { Component } from 'react';
+import React from 'react';
 import equal from 'fast-deep-equal';
 import produce from 'immer';
 import Subscribe from './subscribe';
 
 function createProvider({
-  state, dispatch, mapStateToProps, Components,
+  state, dispatch, mapStateToProps, Components, Frame,
 }) {
+  const FrameUsed = Frame || React;
+  const Component = Object.prototype.hasOwnProperty.call(FrameUsed, 'PureComponent')
+    ? FrameUsed.PureComponent
+    : FrameUsed.Component;
   class Provider extends Component {
     state = { storeState: state };
 
@@ -44,9 +48,10 @@ function createProvider({
         dispatch,
         ...mapStateToProps(storeState),
       };
-      return (
-        <Components {...props} />
-      );
+      if (Object.prototype.hasOwnProperty.call(FrameUsed, 'createElement')) {
+        return FrameUsed.createElement(Components, props);
+      }
+      throw new Error('Incoming framework error, should pass a framework similar to React!');
     }
   }
 
