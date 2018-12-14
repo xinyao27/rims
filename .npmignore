@@ -3,7 +3,7 @@ test
 coverage
 src
 .babelrc
-.editorconnfig
+.editorconfig
 .eslintrc.js
 .gitignore
 package-lock.json
