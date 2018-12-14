@@ -1,11 +1,13 @@
 import React, { Component } from 'react';
+import equal from 'fast-deep-equal';
+import produce from 'immer';
 import Subscribe from './subscribe';
 
 function createProvider({
   state, dispatch, mapStateToProps, Components,
 }) {
   class Provider extends Component {
-    state = { ...state }
+    state = { storeState: state };
 
     _isMounted = false;
 
@@ -21,25 +23,26 @@ function createProvider({
 
     subscribe() {
       const event = Subscribe.subscribe((action, storeState) => {
-        console.log(action, storeState);
         if (!this._isMounted) {
           return;
         }
 
-        this.setState((providerState) => {
-          if (providerState === storeState) {
-            return null;
-          }
-          return { ...storeState };
+        const newState = produce(this.state, (draft) => {
+          draft.storeState = storeState; // eslint-disable-line
         });
+
+        if (!equal(newState, this.state)) {
+          this.setState(newState);
+        }
       });
       this.unsubscribe = event;
     }
 
     render() {
+      const { storeState } = this.state;
       const props = {
         dispatch,
-        ...mapStateToProps(this.state),
+        ...mapStateToProps(storeState),
       };
       return (
         <Components {...props} />

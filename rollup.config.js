@@ -8,9 +8,9 @@ const config = {
   output: {
     file: './dist/rims.js',
     format: 'umd',
-    name: 'Rev',
+    name: 'Rims',
   },
-  external: ['react'],
+  external: ['react', 'immer'],
   plugins: [
     babel({
       exclude: 'node_modules/**', // 只编译我们的源代码

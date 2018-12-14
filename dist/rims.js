@@ -1,10 +1,11 @@
 (function (global, factory) {
-  typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory(require('react')) :
-  typeof define === 'function' && define.amd ? define(['react'], factory) :
-  (global.Rev = factory(global.React));
-}(this, (function (React) { 'use strict';
+  typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory(require('react'), require('immer')) :
+  typeof define === 'function' && define.amd ? define(['react', 'immer'], factory) :
+  (global.Rims = factory(global.React,global.produce));
+}(this, (function (React,produce) { 'use strict';
 
   var React__default = 'default' in React ? React['default'] : React;
+  produce = produce && produce.hasOwnProperty('default') ? produce['default'] : produce;
 
   function _classCallCheck(instance, Constructor) {
     if (!(instance instanceof Constructor)) {
@@ -153,6 +154,60 @@
 
   var Subscribe = createSubscribe();
 
+  var isArray = Array.isArray;
+  var keyList = Object.keys;
+  var hasProp = Object.prototype.hasOwnProperty;
+
+  var fastDeepEqual = function equal(a, b) {
+    if (a === b) return true;
+
+    if (a && b && typeof a == 'object' && typeof b == 'object') {
+      var arrA = isArray(a)
+        , arrB = isArray(b)
+        , i
+        , length
+        , key;
+
+      if (arrA && arrB) {
+        length = a.length;
+        if (length != b.length) return false;
+        for (i = length; i-- !== 0;)
+          if (!equal(a[i], b[i])) return false;
+        return true;
+      }
+
+      if (arrA != arrB) return false;
+
+      var dateA = a instanceof Date
+        , dateB = b instanceof Date;
+      if (dateA != dateB) return false;
+      if (dateA && dateB) return a.getTime() == b.getTime();
+
+      var regexpA = a instanceof RegExp
+        , regexpB = b instanceof RegExp;
+      if (regexpA != regexpB) return false;
+      if (regexpA && regexpB) return a.toString() == b.toString();
+
+      var keys = keyList(a);
+      length = keys.length;
+
+      if (length !== keyList(b).length)
+        return false;
+
+      for (i = length; i-- !== 0;)
+        if (!hasProp.call(b, keys[i])) return false;
+
+      for (i = length; i-- !== 0;) {
+        key = keys[i];
+        if (!equal(a[key], b[key])) return false;
+      }
+
+      return true;
+    }
+
+    return a!==a && b!==b;
+  };
+
   function createProvider(_ref) {
     var state = _ref.state,
         dispatch = _ref.dispatch,
@@ -177,7 +232,9 @@
 
         _this = _possibleConstructorReturn(this, (_getPrototypeOf2 = _getPrototypeOf(Provider)).call.apply(_getPrototypeOf2, [this].concat(args)));
 
-        _defineProperty(_assertThisInitialized(_assertThisInitialized(_this)), "state", _objectSpread({}, state));
+        _defineProperty(_assertThisInitialized(_assertThisInitialized(_this)), "state", {
+          storeState: state
+        });
 
         _defineProperty(_assertThisInitialized(_assertThisInitialized(_this)), "_isMounted", false);
 
@@ -202,28 +259,28 @@
           var _this2 = this;
 
           var event = Subscribe.subscribe(function (action, storeState) {
-            console.log(action, storeState);
-
             if (!_this2._isMounted) {
               return;
             }
 
-            _this2.setState(function (providerState) {
-              if (providerState === storeState) {
-                return null;
-              }
-
-              return _objectSpread({}, storeState);
+            var newState = produce(_this2.state, function (draft) {
+              draft.storeState = storeState; // eslint-disable-line
             });
+
+            if (!fastDeepEqual(newState, _this2.state)) {
+              _this2.setState(newState);
+            }
           });
           this.unsubscribe = event;
         }
       }, {
         key: "render",
         value: function render() {
+          var storeState = this.state.storeState;
+
           var props = _objectSpread({
             dispatch: dispatch
-          }, mapStateToProps(this.state));
+          }, mapStateToProps(storeState));
 
           return React__default.createElement(Components, props);
         }
@@ -249,11 +306,9 @@
         }
 
         if (dispatchType in effects) {
-          var _result = effects[dispatchType](action, {
+          effects[dispatchType]({
             dispatch: dispatch
-          });
-
-          Subscribe.publish(action, _result);
+          }, action);
         }
 
         return action;

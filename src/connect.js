@@ -11,10 +11,9 @@ const connect = (mapStateToProps, { state, reducers, effects }) => (Components) 
     }
 
     if (dispatchType in effects) {
-      const result = effects[dispatchType](action, {
+      effects[dispatchType]({
         dispatch,
-      });
-      Subscribe.publish(action, result);
+      }, action);
     }
 
     return action;

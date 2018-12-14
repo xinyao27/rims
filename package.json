@@ -42,6 +42,8 @@
     "rollup-plugin-terser": "^3.0.0"
   },
   "dependencies": {
+    "fast-deep-equal": "^2.0.1",
+    "immer": "^1.8.2",
     "react": "^16.7.0-alpha.2"
   },
   "config": {
