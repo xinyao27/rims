@@ -1,6 +1,6 @@
 {
   "name": "rims",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "React with immutable status manager when use single file.",
   "main": "dist/rims.min.js",
   "scripts": {
