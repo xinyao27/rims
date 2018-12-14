@@ -1,4 +1,3 @@
-import React from 'react';
 import equal from 'fast-deep-equal';
 import produce from 'immer';
 import Subscribe from './subscribe';
@@ -6,7 +5,7 @@ import Subscribe from './subscribe';
 function createProvider({
   state, dispatch, mapStateToProps, Components, Frame,
 }) {
-  const FrameUsed = Frame || React;
+  const FrameUsed = Frame || require('react');
   const Component = Object.prototype.hasOwnProperty.call(FrameUsed, 'PureComponent')
     ? FrameUsed.PureComponent
     : FrameUsed.Component;

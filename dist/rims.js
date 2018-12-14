@@ -1,10 +1,9 @@
 (function (global, factory) {
-  typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory(require('react'), require('immer')) :
-  typeof define === 'function' && define.amd ? define(['react', 'immer'], factory) :
-  (global.Rims = factory(global.React,global.produce));
-}(this, (function (React,produce) { 'use strict';
+  typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory(require('immer')) :
+  typeof define === 'function' && define.amd ? define(['immer'], factory) :
+  (global.Rims = factory(global.produce));
+}(this, (function (produce) { 'use strict';
 
-  React = React && React.hasOwnProperty('default') ? React['default'] : React;
   produce = produce && produce.hasOwnProperty('default') ? produce['default'] : produce;
 
   function _classCallCheck(instance, Constructor) {
@@ -214,7 +213,9 @@
         mapStateToProps = _ref.mapStateToProps,
         Components = _ref.Components,
         Frame = _ref.Frame;
-    var FrameUsed = Frame || React;
+
+    var FrameUsed = Frame || require('react');
+
     var Component = Object.prototype.hasOwnProperty.call(FrameUsed, 'PureComponent') ? FrameUsed.PureComponent : FrameUsed.Component;
 
     var Provider =
