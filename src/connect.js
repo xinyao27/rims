@@ -1,16 +1,27 @@
 import Subscribe from './subscribe';
 import Provider from './provider';
+import {
+  checkMapStateToProps, checkModel, checkFrame, checkAction,
+} from './check';
 
-const connect = (mapStateToProps, { state, reducers, effects }, Frame) => (Components) => {
+const connect = (mapStateToProps, model, Frame) => (Components) => {
+  checkMapStateToProps(mapStateToProps);
+  checkModel(model);
+  checkFrame(Frame);
+
+  const { state, reducers, effects } = model;
+
   const dispatch = (action) => {
+    checkAction(action);
+
     const { type: dispatchType } = action;
 
-    if (dispatchType in reducers) {
+    if (reducers && Object.prototype.hasOwnProperty.call(reducers, dispatchType)) {
       const result = reducers[dispatchType](state, action);
       Subscribe.publish(action, result);
     }
 
-    if (dispatchType in effects) {
+    if (effects && Object.prototype.hasOwnProperty.call(effects, dispatchType)) {
       effects[dispatchType]({
         dispatch,
       }, action);

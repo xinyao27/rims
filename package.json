@@ -44,6 +44,7 @@
   "dependencies": {
     "fast-deep-equal": "^2.0.1",
     "immer": "^1.8.2",
+    "invariant": "^2.2.4",
     "react": "^16.7.0-alpha.2"
   },
   "config": {
