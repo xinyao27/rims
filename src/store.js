@@ -2,10 +2,10 @@ import invariant from 'invariant';
 import { NAMESPACE_SEP } from './constants';
 
 function prefix(obj, namespace, type) {
-  // invariant(
-  //   namespace,
-  //   '[rims.createStore] when you use createStore, namespace should be defined',
-  // );
+  invariant(
+    namespace,
+    '[rims.createStore] when you use createStore, namespace should be defined',
+  );
 
   if (type === 'state') {
     return {

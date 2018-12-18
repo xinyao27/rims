@@ -38,6 +38,7 @@ function createDispatch(model) {
         }
       };
       effects[dispatchType]({
+        state,
         dispatch: effectsDispatch,
       }, action);
     }
