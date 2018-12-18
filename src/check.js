@@ -9,25 +9,39 @@ function checkMapStateToProps(mapStateToProps) {
 }
 
 function checkModel(model) {
-  const { reducers, effects } = model;
-
   invariant(
-    Object.prototype.hasOwnProperty.call(model, 'state'),
-    '[rims.model] state should be defined',
+    isPlainObject(model) || isPlainObject(model().models),
+    `[rims.model] model should be plain object, but got ${typeof model}`,
   );
 
-  if (reducers) {
-    invariant(
-      isPlainObject(reducers),
-      `[rims.model] reducers should be plain object, bug got ${typeof reducers}`,
-    );
-  }
+  if (isPlainObject(model)) {
+    const { namespace, reducers, effects } = model;
 
-  if (effects) {
     invariant(
-      isPlainObject(effects),
-      `[rims.model] effects should be plain object, but got ${typeof effects}`,
+      Object.prototype.hasOwnProperty.call(model, 'state'),
+      '[rims.model] state should be defined',
     );
+
+    if (namespace) {
+      invariant(
+        typeof namespace === 'string',
+        `[rims.model] namespace should be string, bug got ${typeof namespace}`,
+      );
+    }
+
+    if (reducers) {
+      invariant(
+        isPlainObject(reducers),
+        `[rims.model] reducers should be plain object, bug got ${typeof reducers}`,
+      );
+    }
+
+    if (effects) {
+      invariant(
+        isPlainObject(effects),
+        `[rims.model] effects should be plain object, but got ${typeof effects}`,
+      );
+    }
   }
 }
 

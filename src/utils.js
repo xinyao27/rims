@@ -17,8 +17,11 @@ const isPlainObject = (val) => {
 
 const isFunction = func => typeof func === 'function';
 
+const isArray = Array.isArray.bind(Array);
+
 export {
   isObject,
   isPlainObject,
   isFunction,
+  isArray,
 };

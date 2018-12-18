@@ -50,7 +50,7 @@ function createProvider({
       if (Object.prototype.hasOwnProperty.call(FrameUsed, 'createElement')) {
         return FrameUsed.createElement(Components, props);
       }
-      throw new Error('Incoming framework error, should pass a framework similar to React!');
+      return null;
     }
   }
 
