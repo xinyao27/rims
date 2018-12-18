@@ -3,7 +3,7 @@ import Subscribe from './subscribe';
 import { NAMESPACE_SEP } from './constants';
 
 function createDispatch(model) {
-  const state = typeof model === 'function' ? model().getState() : model.state;
+  const getState = typeof model === 'function' ? model().getState : () => model.state;
   const { reducers, effects } = typeof model === 'function' ? model().models : model;
 
   const dispatch = (action) => {
@@ -14,11 +14,11 @@ function createDispatch(model) {
     if (reducers && Object.prototype.hasOwnProperty.call(reducers, dispatchType)) {
       if (namespace) {
         const result = model().updateState({
-          [namespace]: reducers[dispatchType](state[namespace], action),
+          [namespace]: reducers[dispatchType](getState()[namespace], action),
         });
         Subscribe.publish(action, result);
       } else {
-        const result = reducers[dispatchType](state, action);
+        const result = reducers[dispatchType](getState(), action);
         Subscribe.publish(action, result);
       }
     }
@@ -38,7 +38,7 @@ function createDispatch(model) {
         }
       };
       effects[dispatchType]({
-        state,
+        state: getState(),
         dispatch: effectsDispatch,
       }, action);
     }
