@@ -1,6 +1,6 @@
 {
   "name": "rims",
-  "version": "2.0.1",
+  "version": "2.0.2",
   "description": "Another way redux combines with react",
   "main": "dist/rims.min.js",
   "scripts": {
