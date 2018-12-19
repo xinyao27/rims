@@ -1,8 +1,8 @@
 import Provider from './provider';
 import { checkMapStateToProps, checkMapDispatchToProps, checkFrame } from './check';
 
-function createConnect(store, frame) {
-  checkFrame(frame);
+function createConnect(store, Frame) {
+  checkFrame(Frame);
   return (mapStateToProps, mapDispatchToProps) => (Components) => {
     checkMapStateToProps(mapStateToProps);
     checkMapDispatchToProps(mapDispatchToProps);
@@ -11,7 +11,7 @@ function createConnect(store, frame) {
       mapStateToProps,
       mapDispatchToProps,
       Components,
-      frame,
+      Frame,
     });
   };
 }
