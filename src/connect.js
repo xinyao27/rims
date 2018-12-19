@@ -1,22 +1,19 @@
-import Dispatch from './dispatch';
 import Provider from './provider';
-import { checkMapStateToProps, checkModel, checkFrame } from './check';
+import { checkMapStateToProps, checkMapDispatchToProps, checkFrame } from './check';
 
-const connect = (mapStateToProps, model, Frame) => (Components) => {
-  checkMapStateToProps(mapStateToProps);
-  checkModel(model);
-  if (Frame) checkFrame(Frame);
+function createConnect(store, frame) {
+  checkFrame(frame);
+  return (mapStateToProps, mapDispatchToProps) => (Components) => {
+    checkMapStateToProps(mapStateToProps);
+    checkMapDispatchToProps(mapDispatchToProps);
+    return Provider({
+      store,
+      mapStateToProps,
+      mapDispatchToProps,
+      Components,
+      frame,
+    });
+  };
+}
 
-  const store = typeof model === 'function' ? model() : model;
-  const dispatch = Dispatch(model);
-
-  return Provider({
-    state: typeof model === 'function' ? store.getState() : model.state,
-    dispatch,
-    mapStateToProps,
-    Components,
-    Frame,
-  });
-};
-
-export default connect;
+export default createConnect;

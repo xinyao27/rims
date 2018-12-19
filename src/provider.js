@@ -1,16 +1,14 @@
 import equal from 'fast-deep-equal';
-import produce from 'immer';
-import Subscribe from './subscribe';
 
 function createProvider({
-  state, dispatch, mapStateToProps, Components, Frame,
+  store, mapStateToProps, mapDispatchToProps, Components, Frame,
 }) {
   const FrameUsed = Frame || require('react');
   const Component = Object.prototype.hasOwnProperty.call(FrameUsed, 'PureComponent')
-    ? FrameUsed.PureComponent
+    ? FrameUsed.Component
     : FrameUsed.Component;
   class Provider extends Component {
-    state = { storeState: state };
+    state = { storeState: store.getState() };
 
     _isMounted = false;
 
@@ -19,33 +17,36 @@ function createProvider({
       this.subscribe();
     }
 
+    shouldComponentUpdate(prevProps, prevState) {
+      if (!equal(mapStateToProps(prevState.storeState), mapStateToProps(this.state.storeState))) {
+        return true;
+      }
+      return false;
+    }
+
     componentWillUnmount() {
       this._isMounted = false;
       this.unsubscribe();
     }
 
+    handleChange = () => {
+      if (!this._isMounted) {
+        return;
+      }
+      if (!equal(store.getState(), this.state.storeState)) {
+        this.setState({ storeState: store.getState() });
+      }
+    }
+
     subscribe() {
-      const event = Subscribe.subscribe((action, storeState) => {
-        if (!this._isMounted) {
-          return;
-        }
-
-        const newState = produce(this.state, (draft) => {
-          draft.storeState = storeState; // eslint-disable-line
-        });
-
-        if (!equal(newState, this.state)) {
-          this.setState(newState);
-        }
-      });
-      this.unsubscribe = event;
+      this.unsubscribe = store.subscribe(this.handleChange);
     }
 
     render() {
-      const { storeState } = this.state;
       const props = {
-        dispatch,
-        ...mapStateToProps(storeState),
+        dispatch: store.dispatch,
+        ...mapStateToProps(this.state.storeState),
+        ...mapDispatchToProps,
       };
       if (Object.prototype.hasOwnProperty.call(FrameUsed, 'createElement')) {
         return FrameUsed.createElement(Components, props);

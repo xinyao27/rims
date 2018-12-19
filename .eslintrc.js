@@ -9,5 +9,7 @@ module.exports = {
     'no-underscore-dangle': 'off',
     'global-require': 'off',
     'no-plusplus': 'off',
+    'react/destructuring-assignment': 'off',
+    'import/prefer-default-export': 'off',
   }
 };

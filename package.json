@@ -1,7 +1,7 @@
 {
   "name": "rims",
   "version": "1.0.6",
-  "description": "React with immutable status manager when use single file.",
+  "description": "Another way redux combines with react",
   "main": "dist/rims.min.js",
   "scripts": {
     "watch": "rollup -c --watch",
@@ -43,7 +43,6 @@
   },
   "dependencies": {
     "fast-deep-equal": "^2.0.1",
-    "immer": "^1.8.2",
     "invariant": "^2.2.4",
     "react": "^16.7.0-alpha.2"
   },

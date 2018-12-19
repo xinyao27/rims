@@ -1,4 +1,3 @@
 # Rims
 
-> 微前端架构下的 React 状态管理器.
-
+> redux 与 react 结合的另一种方式

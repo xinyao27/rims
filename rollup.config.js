@@ -10,7 +10,7 @@ const config = {
     format: 'umd',
     name: 'Rims',
   },
-  external: ['react', 'immer'],
+  external: ['react'],
   plugins: [
     babel({
       exclude: 'node_modules/**', // 只编译我们的源代码

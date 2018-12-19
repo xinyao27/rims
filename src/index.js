@@ -1,7 +1,5 @@
-import connect from './connect';
-import createStore from './store';
+import createConnect from './connect';
 
-export default {
-  connect,
-  createStore,
+export {
+  createConnect,
 };
