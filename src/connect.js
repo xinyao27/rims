@@ -3,14 +3,14 @@ import { checkMapStateToProps, checkMapDispatchToProps, checkFrame } from './che
 
 function createConnect(store, Frame) {
   checkFrame(Frame);
-  return (mapStateToProps, mapDispatchToProps) => (Components) => {
+  return (mapStateToProps, mapDispatchToProps) => (WrappedComponent) => {
     checkMapStateToProps(mapStateToProps);
     checkMapDispatchToProps(mapDispatchToProps);
     return Provider({
       store,
       mapStateToProps,
       mapDispatchToProps,
-      Components,
+      WrappedComponent,
       Frame,
     });
   };

@@ -43,6 +43,7 @@
   },
   "dependencies": {
     "fast-deep-equal": "^2.0.1",
+    "hoist-non-react-statics": "^3.2.1",
     "invariant": "^2.2.4",
     "react": "^16.7.0-alpha.2"
   },
