@@ -2,12 +2,19 @@ import equal from 'fast-deep-equal';
 import hoistNonReactStatics from 'hoist-non-react-statics';
 
 function createProvider({
-  store, mapStateToProps, mapDispatchToProps, WrappedComponent, Frame,
+  store,
+  mapStateToProps,
+  mapDispatchToProps,
+  WrappedComponent,
+  Frame,
 }) {
   const FrameUsed = Frame || require('react');
   const Component = Object.prototype.hasOwnProperty.call(FrameUsed, 'PureComponent')
     ? FrameUsed.Component
     : FrameUsed.Component;
+
+  const wrappedComponentName = WrappedComponent.displayName || WrappedComponent.name || 'Component';
+
   class Provider extends Component {
     state = { storeState: store.getState() };
 
@@ -55,6 +62,9 @@ function createProvider({
       return null;
     }
   }
+
+  Provider.WrappedComponent = WrappedComponent;
+  Provider.displayName = wrappedComponentName;
 
   return hoistNonReactStatics(Provider, WrappedComponent);
 }
