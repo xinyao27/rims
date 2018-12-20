@@ -15,10 +15,37 @@ function createProvider({
 
   const wrappedComponentName = WrappedComponent.displayName || WrappedComponent.name || 'Component';
 
-  class Provider extends Component {
-    state = { storeState: store.getState() };
+  const FinalWrappedComponent = WrappedComponent;
 
-    _isMounted = false;
+  function makeChildElementSelector() {
+    let lastChildProps;
+    let lastChildElement;
+
+    return function selectChildElement(childProps) {
+      if (childProps !== lastChildProps) {
+        lastChildProps = childProps;
+        lastChildElement = FrameUsed.createElement(
+          FinalWrappedComponent,
+          childProps,
+        );
+      }
+
+      return lastChildElement;
+    };
+  }
+
+  class Provider extends Component {
+    constructor(props) {
+      super(props);
+
+      this.state = { storeState: store.getState() };
+
+      this._isMounted = false;
+
+      this.handleStoreStateChange = this.handleStoreStateChange.bind(this);
+
+      this.selectChildElement = makeChildElementSelector();
+    }
 
     componentDidMount() {
       this._isMounted = true;
@@ -37,7 +64,7 @@ function createProvider({
       this.unsubscribe();
     }
 
-    handleChange = () => {
+    handleStoreStateChange() {
       if (!this._isMounted) {
         return;
       }
@@ -47,7 +74,7 @@ function createProvider({
     }
 
     subscribe() {
-      this.unsubscribe = store.subscribe(this.handleChange);
+      this.unsubscribe = store.subscribe(this.handleStoreStateChange);
     }
 
     render() {
@@ -55,9 +82,10 @@ function createProvider({
         dispatch: store.dispatch,
         ...mapStateToProps(this.state.storeState),
         ...mapDispatchToProps,
+        ...this.props,
       };
       if (Object.prototype.hasOwnProperty.call(FrameUsed, 'createElement')) {
-        return FrameUsed.createElement(WrappedComponent, props);
+        return this.selectChildElement(props);
       }
       return null;
     }
