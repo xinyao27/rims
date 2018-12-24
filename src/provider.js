@@ -53,6 +53,9 @@ function createProvider({
     }
 
     shouldComponentUpdate(prevProps, prevState) {
+      if (!equal(prevProps, this.props)) {
+        return true;
+      }
       if (!equal(mapStateToProps(prevState.storeState), mapStateToProps(this.state.storeState))) {
         return true;
       }
@@ -81,7 +84,7 @@ function createProvider({
       const props = {
         dispatch: store.dispatch,
         ...mapStateToProps(this.state.storeState),
-        ...mapDispatchToProps,
+        ...mapDispatchToProps(store.dispatch),
         ...this.props,
       };
       if (Object.prototype.hasOwnProperty.call(FrameUsed, 'createElement')) {

@@ -5,7 +5,7 @@ function checkMapStateToProps(mapStateToProps) {
   if (mapStateToProps) {
     invariant(
       isFunction(mapStateToProps),
-      `[rims.mapStateToProps] mapStateToProps should be a function, got ${typeof mapStateToProps}`,
+      `[rims.mapStateToProps] mapStateToProps should be a function or undefined/null, got ${typeof mapStateToProps}`,
     );
   }
 }
