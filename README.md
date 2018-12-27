@@ -53,7 +53,7 @@ class App extends React.Component{
 
 ## 多页面应用状态共享
 
-通过状态数据持久化实现, 使用 [`redux-persist`](https://github.com/rt2zz/redux-persist) 实现状态数据持久化.
+通过状态数据持久化实现, 使用 [`redux-persist`](https://github.com/rt2zz/redux-persist) 实现状态数据持久化.
 
 ```js
 // createConnect.js
