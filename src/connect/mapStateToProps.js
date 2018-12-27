@@ -1,5 +1,5 @@
 import { wrapMapToPropsConstant, wrapMapToPropsFunc } from './wrapMapToProps';
-import { checkMapStateToProps } from './check';
+import { checkMapStateToProps } from '../utils/check';
 
 function whenMapStateToPropsIsFunction(mapStateToProps) {
   return wrapMapToPropsFunc(mapStateToProps, 'mapStateToProps');

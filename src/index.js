@@ -1,4 +1,4 @@
-import createConnect from './connect';
+import createConnect from './connect/connect';
 
 export {
   createConnect,

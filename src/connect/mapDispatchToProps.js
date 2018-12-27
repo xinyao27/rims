@@ -1,7 +1,7 @@
 import { bindActionCreators } from 'redux';
 import { wrapMapToPropsConstant } from './wrapMapToProps';
-import { checkMapDispatchToProps } from './check';
-import { isObject } from './utils';
+import { checkMapDispatchToProps } from '../utils/check';
+import { isObject } from '../utils/utils';
 
 function whenMapDispatchToPropsIsMissing() {
   return () => wrapMapToPropsConstant({});

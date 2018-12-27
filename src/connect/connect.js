@@ -1,5 +1,5 @@
-import Provider from './provider';
-import { checkFrame } from './check';
+import Provider from '../components/provider';
+import { checkFrame } from '../utils/check';
 import initMapStateToProps from './mapStateToProps';
 import initDispatchToProps from './mapDispatchToProps';
 
