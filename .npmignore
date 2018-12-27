@@ -11,3 +11,4 @@ rollup.config.js
 yarn.lock
 .idea
 .vscode
+jest.config.js

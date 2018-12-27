@@ -1,4 +1,4 @@
-import { isObject, isPlainObject, isFunction } from '../../src/utils/utils';
+import { isObject, isPlainObject, isFunction } from '../src/utils/utils';
 
 describe('isObject', () => {
   it('returns true only if object', () => {

@@ -35,6 +35,8 @@
     "babel-plugin-transform-es2015-modules-commonjs": "^6.26.2",
     "codecov": "^3.1.0",
     "cz-conventional-changelog": "^2.1.0",
+    "enzyme": "^3.8.0",
+    "enzyme-adapter-react-16": "^1.7.1",
     "eslint": "^5.10.0",
     "eslint-config-airbnb": "^17.1.0",
     "eslint-plugin-import": "^2.14.0",
@@ -42,6 +44,7 @@
     "eslint-plugin-jsx-a11y": "^6.1.1",
     "eslint-plugin-react": "^7.11.0",
     "jest": "^23.6.0",
+    "react-dom": "^16.7.0",
     "rollup": "^0.67.4",
     "rollup-plugin-babel": "^4.1.0",
     "rollup-plugin-commonjs": "^9.2.0",
@@ -59,12 +62,5 @@
     "commitizen": {
       "path": "./node_modules/cz-conventional-changelog"
     }
-  },
-  "jest": {
-    "coverageDirectory": "./coverage/",
-    "collectCoverage": true,
-    "testPathIgnorePatterns": [
-      "<rootDir>/(dist|demo|node_modules)"
-    ]
   }
 }
