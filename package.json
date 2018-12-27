@@ -1,0 +1,16 @@
+{
+  "private": true,
+  "version": "1.0.0",
+  "scripts": {
+    "start": "mdx-deck deck.mdx",
+    "build": "mdx-deck build deck.mdx",
+    "pdf": "mdx-deck pdf deck.mdx",
+    "image": "mdx-deck screenshot deck.mdx",
+    "help": "mdx-deck"
+  },
+  "keywords": [],
+  "devDependencies": {
+    "mdx-deck": "^1.8.2"
+  },
+  "name": "rims-deck"
+}

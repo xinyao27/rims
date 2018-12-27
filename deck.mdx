@@ -1,0 +1,81 @@
+export { default as theme } from './theme'
+
+# rims
+
+---
+
+## Why not react-redux ?
+
+---
+
+`react-redux` 通过 `context` 将整个项目变成了一颗 "组件树", 每个组件变成了这棵树上的节点
+
+---
+
+![react-redux.png](https://i.loli.net/2018/12/27/5c2446220f4f1.png)
+
+---
+
+这就意味着如果有一个组件脱离了这颗树, 那么这个组件将无法与 `store` 通信
+
+例如 ==>
+
+---
+
+```jsx
+const ModalContainer = ({ url, buttons }) => {
+  const div = document.createElement('div');
+  div.setAttribute("id", "Modal");
+  const wrapper = document.body.appendChild(div);
+
+  const onClose = () => {
+    if (wrapper) {
+      document.body.removeChild(wrapper);
+      ReactDOM.unmountComponentAtNode(wrapper);
+    }
+  };
+
+  ReactDOM.render(
+    <Modal
+      onClose={onClose}
+      url={url}
+      buttons={buttons}
+    />, wrapper);
+};
+```
+
+---
+
+## rims
+
+---
+
+`rims` 架构下, 整个项目看起来像是一个圆环, 无论是子组件或父组件, 他们直接与圆环中心相关联
+
+---
+
+![rims.png](https://i.loli.net/2018/12/27/5c2446359ecae.png)
+
+---
+
+### `rims` 结合 `redux-persist`
+
+---
+
+![multi-page.png](https://i.loli.net/2018/12/27/5c245e529bdde.png)
+
+---
+
+针对类似于上图的多页应用, 结合 `redux-persist` 后更是可以做到多页应用的状态共享
+
+---
+
+![multi-pagewithrimsandredux-persist.png](https://i.loli.net/2018/12/27/5c246056d3404.png)
+
+---
+
+[rims](https://github.com/chenyueban/rims) 😉
+
+thanks!
+
+---
