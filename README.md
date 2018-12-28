@@ -5,7 +5,7 @@
 [![npm](https://img.shields.io/npm/v/rims.svg)](https://www.npmjs.com/package/rims)
 [![GitHub](https://img.shields.io/github/license/mashape/apistatus.svg)](https://github.com/chenyueban/rims/blob/master/LICENSE)
 
-> redux 与 react 结合的另一种方式, 提供与 `react-redux` 相同的 api, 底层使用闭包实现, 告别 context!
+> 即插即用的 `react` 与 `redux` 连接池, 提供与 `react-redux` 相同的 api, 使用闭包实现, 告别 context!
 
 ## Why not `react-redux` ?
 
@@ -28,7 +28,7 @@ yarn add rims
 ```
 
 ### Create store and connect
- 
+
 ```js
 // createConnect.js
 import { createStore } from 'redux';
