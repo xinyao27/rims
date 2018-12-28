@@ -1,6 +1,6 @@
 {
   "name": "rims",
-  "version": "2.0.3",
+  "version": "2.0.4",
   "description": "Another way redux combines with react",
   "main": "dist/rims.min.js",
   "scripts": {
@@ -8,7 +8,8 @@
     "build": "rollup -c && rollup -c --compress",
     "lint": "eslint ./src",
     "test": "jest",
-    "codecov": "codecov"
+    "codecov": "codecov",
+    "version": "conventional-changelog -p angular -i CHANGELOG.md -s -r 0 && git add CHANGELOG.md"
   },
   "repository": {
     "type": "git",
