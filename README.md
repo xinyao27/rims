@@ -1,8 +1,8 @@
 # Rims
 
-[![Build Status](https://travis-ci.org/chenyueban/ohbug.svg?branch=master)](https://travis-ci.org/chenyueban/rims)
-[![codecov](https://codecov.io/gh/chenyueban/ohbug/branch/master/graph/badge.svg)](https://codecov.io/gh/chenyueban/rims)
-[![npm](https://img.shields.io/npm/v/ohbug.svg)](https://www.npmjs.com/package/rims)
+[![Build Status](https://travis-ci.org/chenyueban/rims.svg?branch=master)](https://travis-ci.org/chenyueban/rims)
+[![codecov](https://codecov.io/gh/chenyueban/rims/branch/master/graph/badge.svg)](https://codecov.io/gh/chenyueban/rims)
+[![npm](https://img.shields.io/npm/v/rims.svg)](https://www.npmjs.com/package/rims)
 [![GitHub](https://img.shields.io/github/license/mashape/apistatus.svg)](https://github.com/chenyueban/rims/blob/master/LICENSE)
 
 > redux 与 react 结合的另一种方式, 提供与 `react-redux` 相同的 api, 底层使用闭包实现, 告别 context!
