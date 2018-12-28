@@ -11,5 +11,6 @@ module.exports = {
     'no-plusplus': 'off',
     'react/destructuring-assignment': 'off',
     'import/prefer-default-export': 'off',
+    'react/prop-types': 'off',
   }
 };
