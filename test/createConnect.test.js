@@ -6,6 +6,24 @@ import { createStore } from 'redux';
 import { createConnect } from '../src';
 
 describe('createConnect', () => {
+  it('connect and children should have props dispatch', () => {
+    const initialState = {
+      foo: 'bar',
+    };
+    const store = createStore(() => initialState);
+    const connect = createConnect(store);
+
+    const AppComponent = (props) => {
+      expect(Object.hasOwnProperty.call(props, 'dispatch')).toBe(true);
+      return (
+        <div>{props.foo}</div>
+      );
+    };
+    const App = connect(state => state)(AppComponent);
+
+    render(<App />);
+  });
+
   it('should map state and render once on mount', () => {
     let mapCount = 0;
     let renderCount = 0;

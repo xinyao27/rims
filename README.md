@@ -5,13 +5,23 @@
 [![npm](https://img.shields.io/npm/v/rims.svg)](https://www.npmjs.com/package/rims)
 [![GitHub](https://img.shields.io/github/license/mashape/apistatus.svg)](https://github.com/chenyueban/rims/blob/master/LICENSE)
 
-> 即插即用的 `react` 与 `redux` 连接池, 提供与 `react-redux` 相同的 api, 使用闭包实现, 告别 context!
+> 即插即用的 `react` 与 `redux` 连接池, 提供与 `react-redux` 相同的 api, 使用闭包实现!
 
 ## Why not `react-redux` ?
 
-`react-redux` 使用 `context` 链接各个组件, 这意味着一旦两个组件不属于同一个根组件, 二者数据将无法共享.
+`react-redux` 通过 `context` 将整个项目变成了一颗 "组件树", 每个组件变成了这棵树上的节点
 
-`rims` 提供与 `react-redux` 相同用法的 `connect`, 但是 `rims` 不需要写 `Provider`, 你需要的仅仅是创建 `store` 与 `createConnect`.
+![react-redux.png](https://i.loli.net/2018/12/27/5c2446220f4f1.png)
+
+这就意味着如果有一个组件脱离了这颗树, 那么这个组件将无法与 `store` 通信
+
+`rims` 架构下, 整个项目看起来像是一个圆环, 无论是子组件或父组件, 他们直接与圆环中心相关联
+
+![rims.png](https://i.loli.net/2018/12/27/5c2446359ecae.png)
+
+`rims` 提供与 `react-redux` 相同用法的 `connect`.
+
+`rims` 即插即用 甚至可以与原有使用 `react-redux` 的项目共存(注意: 同一组件不要同时使用二者的 `connect`), 可将 `store` 直接传入 `createConnect`, 只维护一个 `store`.
 
 `rims` 利用闭包实现组件之间的联系, 如果结合 `redux-persist` 甚至可以达到不同页面之间的数据流通.
 
