@@ -10,10 +10,10 @@ const config = {
     format: 'umd',
     name: 'Rims',
   },
-  external: ['react'],
+  external: ['react', 'redux'],
   plugins: [
     babel({
-      exclude: 'node_modules/**', // 只编译我们的源代码
+      exclude: 'node_modules/**',
     }),
     commonjs({
       include: 'node_modules/**',

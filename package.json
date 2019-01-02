@@ -2,7 +2,7 @@
   "name": "rims",
   "version": "2.0.4",
   "description": "Another way redux combines with react",
-  "main": "dist/rims.min.js",
+  "main": "dist/rims.js",
   "scripts": {
     "watch": "rollup -c --watch",
     "build": "rollup -c && rollup -c --compress",
@@ -50,14 +50,18 @@
     "rollup-plugin-babel": "^4.1.0",
     "rollup-plugin-commonjs": "^9.2.0",
     "rollup-plugin-node-resolve": "^4.0.0",
-    "rollup-plugin-terser": "^3.0.0"
+    "rollup-plugin-terser": "^3.0.0",
+    "react": "next",
+    "redux": "^4.0.1"
   },
   "dependencies": {
     "fast-deep-equal": "^2.0.1",
     "hoist-non-react-statics": "^3.2.1",
-    "invariant": "^2.2.4",
-    "react": "^16.7.0-alpha.2",
-    "redux": "^4.0.1"
+    "invariant": "^2.2.4"
+  },
+  "peerDependencies": {
+    "react": "^16.4.0-0",
+    "redux": "^4.0.0-0"
   },
   "config": {
     "commitizen": {
