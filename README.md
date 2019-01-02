@@ -21,7 +21,7 @@
 
 `rims` 提供与 `react-redux` 相同用法的 `connect`.
 
-`rims` 即插即用 甚至可以与原有使用 `react-redux` 的项目共存(注意: 同一组件不要同时使用二者的 `connect`), 可将 `store` 直接传入 `createConnect`, 只维护一个 `store`.
+`rims` 即插即用 甚至可以与原有使用 `react-redux` 的项目共存(注意: 同一组件不要同时使用二者的 `connect`), 可将 `store` 直接传入 `createConnect`, 只维护一个 `store`.
 
 `rims` 利用闭包实现组件之间的联系, 如果结合 `redux-persist` 甚至可以达到不同页面之间的数据流通.
 
