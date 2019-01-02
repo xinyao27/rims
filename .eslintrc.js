@@ -12,5 +12,7 @@ module.exports = {
     'react/destructuring-assignment': 'off',
     'import/prefer-default-export': 'off',
     'react/prop-types': 'off',
+    'react/prefer-stateless-function': 'off',
+    'react/no-multi-comp': 'off',
   }
 };
