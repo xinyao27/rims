@@ -5,7 +5,7 @@
 [![npm](https://img.shields.io/npm/v/rims.svg)](https://www.npmjs.com/package/rims)
 [![GitHub](https://img.shields.io/github/license/mashape/apistatus.svg)](https://github.com/chenyueban/rims/blob/master/LICENSE)
 
-> 即插即用的 `react` 与 `redux` 连接池, 提供与 `react-redux` 相同的 api, 使用闭包实现!
+> 即插即用的 `react` 与 `redux` 连接池, 提供与 `react-redux` 相同的 api.
 
 ## Why not `react-redux` ?
 
@@ -22,8 +22,6 @@
 `rims` 提供与 `react-redux` 相同用法的 `connect`.
 
 `rims` 即插即用 甚至可以与原有使用 `react-redux` 的项目共存(注意: 同一组件不要同时使用二者的 `connect`), 可将 `store` 直接传入 `createConnect`, 只维护一个 `store`.
-
-`rims` 利用闭包实现组件之间的联系, 如果结合 `redux-persist` 甚至可以达到不同页面之间的数据流通.
 
 ## Quick Start
 
