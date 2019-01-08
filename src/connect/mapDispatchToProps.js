@@ -1,4 +1,4 @@
-import { bindActionCreators } from 'redux';
+import bindActionCreators from './bindActionCreators';
 import { wrapMapToPropsConstant } from './wrapMapToProps';
 import { checkMapDispatchToProps } from '../utils/check';
 import { isObject } from '../utils/utils';
