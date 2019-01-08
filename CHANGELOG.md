@@ -1,3 +1,12 @@
+## [2.0.5](https://github.com/chenyueban/rims/compare/v2.0.4...v2.0.5) (2019-01-08)
+
+
+### Features
+
+* **mapDispatchToProps.js:** Remove dependency on redux ([8394254](https://github.com/chenyueban/rims/commit/8394254))
+
+
+
 ## [2.0.4](https://github.com/chenyueban/rims/compare/v2.0.3...v2.0.4) (2018-12-28)
 
 
