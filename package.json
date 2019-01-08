@@ -14,10 +14,11 @@
   },
   "name": "rims-deck",
   "dependencies": {
+    "react-redux": "^6.0.0",
     "redux": "^4.0.1",
     "redux-logger": "^3.0.6",
     "redux-persist": "^5.10.0",
     "redux-thunk": "^2.3.0",
-    "rims": "^2.0.3"
+    "rims": "^2.0.5"
   }
 }
