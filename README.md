@@ -103,7 +103,7 @@ const store = createStore(persistedReducer);
 export default createConnect(store);
 ```
 
-## 最后
+## 最后
 
 `rims` 仍然有许多不足, 如果你对 `rims` 感兴趣, 欢迎加入.
 
